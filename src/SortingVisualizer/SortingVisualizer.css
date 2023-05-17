@@ -1,0 +1,13 @@
+.bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.25rem;
+  border: 1px dashed red;
+  margin: 0 1rem;
+  height: 500px;
+}
+
+.bar {
+  flex-shrink: 0;
+}
