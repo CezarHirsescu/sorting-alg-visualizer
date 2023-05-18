@@ -27,4 +27,4 @@ function selectionSortSteps(arr) {
 }
 
 
-export { selectionSortSteps }
+export default selectionSortSteps
