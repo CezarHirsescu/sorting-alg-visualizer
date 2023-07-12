@@ -12,7 +12,7 @@ function selectionSortSteps(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
     let pos = i
     for (let j = i + 1; j < arr.length; j++) {
-      steps.push({swap: [], highlight: [i, j, pos]})
+      steps.push({swap: [], highlight: [i, pos, j]})
       if (arr[j] < arr[pos]) {
         pos = j
       }

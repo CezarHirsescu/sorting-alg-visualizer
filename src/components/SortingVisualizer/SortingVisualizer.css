@@ -1,0 +1,68 @@
+/* component positioning */
+.app {
+  color: rgba(255, 255, 255, 0.83);
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 10% 1fr 20%;
+}
+
+.header, .footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+} */
+
+
+/* header styles */
+.header-item {
+  border: 4px solid #212121;
+  border-radius: 10px;
+  font-family: "Roboto" sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.83);
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.header-item:hover {
+  cursor: pointer;
+  border: 4px solid #2AABBB;
+  transition: all 200ms ease;
+}
+
+.header-item:active {
+  transform: scale(0.98);
+}
+
+.selected {
+  border: 4px solid #2AABBB;
+  color: #2AABBB
+}
+
+
+/* bar styles */
+.bar-container {
+  /* text-align: center; */
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.25rem;
+  height: 500px;
+  width: 100%;
+}
+
+.bar {
+  flex-shrink: 0;
+}
+
+

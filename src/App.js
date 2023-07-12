@@ -1,13 +1,15 @@
-import SortingVisualizer from "./SortingVisualizer/SortingVisualizer";
+import SortingVisualizer from "./components/SortingVisualizer/SortingVisualizer"
+
 
 function App() {
-  return (
-    <div className="App">
-      <SortingVisualizer>
 
-      </SortingVisualizer>
-    </div>
-  );
+	return (
+		
+			<div className="sort">
+				<SortingVisualizer />
+			</div>
+		
+	)
 }
 
-export default App;
+export default App
