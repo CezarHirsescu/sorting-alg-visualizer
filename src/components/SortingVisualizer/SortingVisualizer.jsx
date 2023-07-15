@@ -4,8 +4,10 @@ import "./SortingVisualizer.css"
 import { selectionSortSteps } from "../../algorithms"
 import { COLORS } from "../../constants"
 import Button from "../Button/Button"
+import Toggle from "../Toggle/Toggle"
 
 const Algorithms = {
+	None: -1,
 	SelectionSort: 0,
 	MergeSort: 1,
 	QuickSort: 2,
@@ -114,39 +116,36 @@ const SortingVisualizer = () => {
 		}
 	}
 
-	const algCSSClassHelper = (SortingAlg) =>
-		algorithm === SortingAlg ? "header-item selected" : "header-item"
-    
-	const algOnClickHelper = (SortingAlg) =>
+	const toggleAlgHelper = (SortingAlg) =>
 		setAlgorithm((prev) => (prev === SortingAlg ? -1 : SortingAlg))
 
 	return (
 		<div className="app">
 			<div className="header">
-				<div
-					className={algCSSClassHelper(Algorithms.SelectionSort)}
-					onClick={() => algOnClickHelper(Algorithms.SelectionSort)}
+				<Toggle
+					onClick={() => toggleAlgHelper(Algorithms.SelectionSort)}
+					isToggled={Algorithms.SelectionSort === algorithm}
 				>
 					Selection Sort
-				</div>
-				<div
-					className={algCSSClassHelper(Algorithms.MergeSort)}
-					onClick={() => algOnClickHelper(Algorithms.MergeSort)}
+				</Toggle>
+				<Toggle
+					onClick={() => toggleAlgHelper(Algorithms.MergeSort)}
+					isToggled={Algorithms.MergeSort === algorithm}
 				>
 					Merge Sort
-				</div>
-				<div
-					className={algCSSClassHelper(Algorithms.QuickSort)}
-					onClick={() => algOnClickHelper(Algorithms.QuickSort)}
+				</Toggle>
+				<Toggle
+					onClick={() => toggleAlgHelper(Algorithms.QuickSort)}
+					isToggled={Algorithms.QuickSort === algorithm}
 				>
 					Quick Sort
-				</div>
-				<div
-					className={algCSSClassHelper(Algorithms.InsertionSort)}
-					onClick={() => algOnClickHelper(Algorithms.InsertionSort)}
+				</Toggle>
+				<Toggle
+					onClick={() => toggleAlgHelper(Algorithms.InsertionSort)}
+					isToggled={Algorithms.InsertionSort === algorithm}
 				>
 					Insertion Sort
-				</div>
+				</Toggle>
 			</div>
 
 			<div className="bar-container">

@@ -1,0 +1,26 @@
+button {
+  border: 4px solid #212121;
+  border-radius: 10px;
+  font-family: "Roboto" sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.83);
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #212121;
+}
+
+button:hover {
+  cursor: pointer;
+  border: 4px solid #2AABBB;
+  transition: all 200ms ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.toggled {
+  border: 4px solid #2AABBB;
+  color: #2AABBB
+}
