@@ -4,17 +4,17 @@ import "./SortingVisualizer.css"
 import { selectionSortSteps } from "../../algorithms"
 import { COLORS } from "../../constants"
 import Button from "../Button/Button"
-import Toggle from "../Toggle/Toggle"
+// import Toggle from "../Toggle/Toggle"
 
-const Algorithms = {
-	None: -1,
-	SelectionSort: 0,
-	MergeSort: 1,
-	QuickSort: 2,
-	InsertionSort: 3,
-}
+// const Algorithms = {
+// 	None: -1,
+// 	SelectionSort: 0,
+// 	MergeSort: 1,
+// 	QuickSort: 2,
+// 	InsertionSort: 3,
+// }
 
-// generateRandomArray(int min, int max, int n) -> int[100]
+// generateRandomArray(int min, int max, int n) -> int[n]
 function generateRandomArray(min, max, n) {
 	const arr = []
 	min = Math.ceil(min)
@@ -40,13 +40,14 @@ function sleep(ms) {
 }
 
 const SortingVisualizer = () => {
-	const [algorithm, setAlgorithm] = useState(-1)
-	const [length, setLength] = useState(50) // in the future I will have a slider to modify the number of elements in the ui
+	// const [algorithm, setAlgorithm] = useState(-1)
+	const [length, setLength] = useState(50)
 	const [values, setValues] = useState(() =>
 		generateRandomArray(50, 500, length)
 	)
 	const [colors, setColors] = useState(() => Array(length).fill(COLORS.aqua))
-	const [delay, setDelay] = useState(500)
+	const [delay, setDelay] = useState(2)
+  const [restrictInput, setRestrictInput] = useState(false) 
 
 	useEffect(() => {
 		setValues(generateRandomArray(50, 500, length))
@@ -55,24 +56,33 @@ const SortingVisualizer = () => {
 			for (let i = 0; i < length; i++) arr.push(COLORS.aqua)
 			return arr
 		})
+    setDelay(() => {
+      if (length <= 10) return 500
+      else if (length <= 15) return 100
+      else if (length <= 20) return 50
+      else if (length <= 30) return 20
+      else if (length <= 50) return 10
+      else return 2
+
+    })
 	}, [length])
 
-	function finishAnimation() {
-		for (let i = -1; i < length; i++) {
-			setTimeout(() => {
-				setColors((prev) => {
-					if (i === -1) {
-						for (let k = 0; k < length; k++) {
-							prev[k] = COLORS.aqua
-						}
-					} else {
-						prev[i] = COLORS.lightGreen
-					}
-					return [...prev]
-				})
-			}, delay * i)
-		}
-	}
+	// function finishAnimation() {
+	// 	for (let i = -1; i < length; i++) {
+	// 		setTimeout(() => {
+	// 			setColors((prev) => {
+	// 				if (i === -1) {
+	// 					for (let k = 0; k < length; k++) {
+	// 						prev[k] = COLORS.aqua
+	// 					}
+	// 				} else {
+	// 					prev[i] = COLORS.lightGreen
+	// 				}
+	// 				return [...prev]
+	// 			})
+	// 		}, delay * i)
+	// 	}
+	// }
 
 	function handleGenerateRandom() {
 		setValues(generateRandomArray(50, 500, length))
@@ -80,6 +90,8 @@ const SortingVisualizer = () => {
 	}
 
 	async function handleSelectionSort() {
+    setRestrictInput(true)
+
 		const steps = selectionSortSteps(values)
 
 		// add empty step to signify that the animation is over
@@ -114,15 +126,17 @@ const SortingVisualizer = () => {
 				await sleep(delay * 2)
 			}
 		}
+
+    setRestrictInput(false)
 	}
 
-	const toggleAlgHelper = (SortingAlg) =>
-		setAlgorithm((prev) => (prev === SortingAlg ? -1 : SortingAlg))
+	// const toggleAlgHelper = (SortingAlg) =>
+	// 	setAlgorithm((prev) => (prev === SortingAlg ? -1 : SortingAlg))
 
 	return (
 		<div className="app">
 			<div className="header">
-				<Toggle
+				{/* <Toggle
 					onClick={() => toggleAlgHelper(Algorithms.SelectionSort)}
 					isToggled={Algorithms.SelectionSort === algorithm}
 				>
@@ -145,7 +159,7 @@ const SortingVisualizer = () => {
 					isToggled={Algorithms.InsertionSort === algorithm}
 				>
 					Insertion Sort
-				</Toggle>
+				</Toggle> */}
 			</div>
 
 			<div className="bar-container">
@@ -166,17 +180,18 @@ const SortingVisualizer = () => {
 			</div>
 
 			<div className="footer">
-				<Button onClick={handleGenerateRandom}>Generate Random Array</Button>
-				<Button onClick={handleSelectionSort}>Start!</Button>
+				<Button onClick={handleGenerateRandom} disabled={restrictInput}>Generate Random Array</Button>
+				<Button onClick={handleSelectionSort} disabled={restrictInput}>Start!</Button>
 
-				<input
+				{/* <input
 					type="range"
 					min="1"
 					max="500"
 					value={delay}
 					onChange={(e) => setDelay(e.target.value)}
+          disabled={restrictInput}
 				/>
-				{delay}
+				{delay} */}
 
 				<input
 					type="range"
@@ -184,6 +199,7 @@ const SortingVisualizer = () => {
 					max="100"
 					value={length}
 					onChange={(e) => setLength(e.target.value)}
+          disabled={restrictInput}
 				/>
 				{length}
 			</div>
